@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} <title>Регистрация учетной записи</title> {% endblock %}
+{% block content %}
+    <div class="header_text"><h4>РЕГИСТРАЦИЯ УЧЕТНОЙ ЗАПИСИ</h4></div>
+    <div class="section_signup">
+    <p>Создайте учетную запись, чтобы иметь полный доступ ко всем возможностям сайта.</p>
+    <form>
+    {% comment %} <p class="alert-danger">Sorry, this email address allready registred!</p> {% endcomment %}
+        <div class="form-row">
+        <div class="form-group mb-3 col">
+            <label for="login">Логин:</label>
+            <input type="text" class="form-control" size="23" id="login" placeholder="Введите Логин">
+        </div>
+        <div class="form-group mb-3 ml-4 col">
+            <label for="email">Email:</label>
+            <input type="E-mail" class="form-control" id="email" placeholder="Введите Ваш E-mail">
+        </div>
+        </div>
+        <div class="form-row">
+        <div class="form-group mb-3 col">
+            <label for="firstname">Имя:</label>
+            <input type="text" class="form-control" id="Nick name" placeholder="Введите Ваше Имя">
+        </div>
+        <div class="form-group mb-3 ml-4 col">
+            <label for="lastname">Фамилия:</label>
+            <input type="text" class="form-control" id="Nick name" placeholder="Введите Вашу Фамилию">
+        </div>
+        </div>
+        <div class="form-row">
+        <div class="form-group mb-3 col">
+            <label for="passwd">Пароль:</label>
+            <input class="form-control" type="password"  id="passwd" placeholder="Пароль">
+        </div>
+         <div class="form-group mb-3 ml-4 col">
+            <label for="rep_passwd">Подтверждение пароля:</label>
+            <input class="form-control" type="password"  id="rep_passwd" placeholder="Введите пароль еще раз">
+        </div>
+        </div>
+        <input type="button" class="btn btn-outline-success" value="Зарегистрироваться">
+    </form>
+    </div>
+{% endblock %}

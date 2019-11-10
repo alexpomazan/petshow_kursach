@@ -18,7 +18,7 @@ def question_list(request, tag=None):
     tags = Tag.objects.all()
     context = {'questions': page.object_list, 'tags': tags,
                'page': page, 'paginator': paginator}
-    return render(request, 'index.html', context=context)
+    return render(request, 'base.html', context=context)
 
 
 def competition(request, number):

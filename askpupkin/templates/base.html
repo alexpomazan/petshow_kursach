@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load staticfiles %}
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/logo.jpg' %}"/>
+        <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}"/>
+    <link rel="stylesheet" href="{% static "css/style.css" %}"/>
+   {% block title %} <title>Pet Show</title> {% endblock %}
+</head>
+<body>
+<div class="wrapper">
+<header>
+ <div class="left_header_container col-4">
+    <div class="main_link"> 
+      <img class="logo" src="{% static "images/logo.png"%}">
+      <h6>Выставка домашних животных</h6>
+      </div>
+      </div>
+      <div class="right_header_container col-8">
+        <nav class="col-9">
+          <ul>
+            <li><a href="#">На главную</a></li>
+            <li><a href="#">Выставки</a></li>
+            <li><a href="#">Форум</a></li>
+            <li><a href="#">О нас</a></li>
+          </ul>
+        </nav>
+        <div class = "authorization col-3">
+        <img class="logo_authorization" src="{% static "images/authorization.png"%}">
+        <a href= "{% url 'login' %}">Авторизация</a>
+        </div>
+      </div>
+    </header>
+    {% block content %}
+    <div class="main_container">
+      <div class="left_box">
+        <div class="text">
+          <p>
+            Tips and Tricks
+          </p>
+          <p>
+            Looking to improve yourself? Then you've come to the right place!
+            Here you'll find tips and tricks to anything concerning photography
+            - no matter if you're a model or photographer. Feel free to add more
+            tips and tricks to the list by contacting me.
+          </p>
+        </div>
+      </div>
+      <div class="right_box"></div>
+    </div>
+</div>
+{% endblock %}
+<footer class="footer">
+    <div class="container">
+        <div class="text-center py-3">
+            © 2018 Copyright:<a href="{% url 'ask' %}"> MDBootstrap.com</a>
+        </div>
+    </div>
+</footer>
+</div>
+<script src="{% static "js/jquery.min.js" %}"></script>
+<script src="{% static "js/popper.min.js" %}"></script>
+<script src="{% static "js/bootstrap.min.js" %}"></script>
+</body>
+</html>
+
