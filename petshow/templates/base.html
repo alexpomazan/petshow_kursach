@@ -28,9 +28,16 @@
             <li><a href="#">О нас</a></li>
           </ul>
         </nav>
+      
         <div class = "authorization col-3">
+          {% if user.is_authenticated%}
+         <p>Welcome, {{user.username}}!</p>
+         <a href= "{% url 'logout' %}">Выйти</a>
+         <a href="{% url 'password_change' %}">Сменить пароль</a>
+          {%else%}
         <img class="logo_authorization" src="{% static "images/authorization.png"%}">
         <a href= "{% url 'login' %}">Авторизация</a>
+          {%endif%}
         </div>
       </div>
     </header>

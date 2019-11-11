@@ -3,7 +3,7 @@
 {% block title %} <title>Авторизация</title> {% endblock %}
 {% block content %}
 
-{% if form.errors %}
+{% comment %} {% if form.errors %}
   <p>Your username and password didn't match. Please try again.</p>
 {% endif %}
 
@@ -14,15 +14,15 @@
   {% else %}
     <p>Please login to see this page.</p>
   {% endif %}
-{% endif %}
+{% endif %} {% endcomment %}
     <div class="header_text"><h4>ВОЙДИТЕ В ВАШ АККАУНТ</h4></div>
     <div class="section_login">
     <div class="left_content col-5"></div>
     <div class="center_content col-4">
-    <form method="post" action="{% url 'login' %}">
-{% csrf_token %}
-    {% comment %} <p class="alert-danger">Sorry, wrong password</p> {% endcomment %}
-        <div class="form-inline mb-2">
+    <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+        {% comment %} <div class="form-inline mb-2">
             <label class="mr-4" for="usr">Логин</label>
             <input type="text" class="form-control" id="login" placeholder="Введите логин">
         </div>
@@ -30,7 +30,8 @@
             <label class="mr-3" for="comment">Пароль</label>
             <input class="form-control" type="password"  id="passwd" placeholder=" Введите пароль">
         </div>
-        <input type="button" class="btn btn-outline-success" value="Войти">
+        {% endcomment %}
+        <input type="submit" class="btn btn-outline-success" value="Войти">
     </form>
     </div>
         <div class="right_content col-3">

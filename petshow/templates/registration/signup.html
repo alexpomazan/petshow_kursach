@@ -5,9 +5,10 @@
     <div class="header_text"><h4>РЕГИСТРАЦИЯ УЧЕТНОЙ ЗАПИСИ</h4></div>
     <div class="section_signup">
     <p>Создайте учетную запись, чтобы иметь полный доступ ко всем возможностям сайта.</p>
-    <form>
-    {% comment %} <p class="alert-danger">Sorry, this email address allready registred!</p> {% endcomment %}
-        <div class="form-row">
+    <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+        {% comment %} {% comment %} <div class="form-row">
         <div class="form-group mb-3 col">
             <label for="login">Логин:</label>
             <input type="text" class="form-control" size="23" id="login" placeholder="Введите Логин">
@@ -37,7 +38,8 @@
             <input class="form-control" type="password"  id="rep_passwd" placeholder="Введите пароль еще раз">
         </div>
         </div>
-        <input type="button" class="btn btn-outline-success" value="Зарегистрироваться">
+        {% endcomment %}
+        <input type="submit" class="btn btn-outline-success" value="Зарегистрироваться">
     </form>
     </div>
 {% endblock %}
