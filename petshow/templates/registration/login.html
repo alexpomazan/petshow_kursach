@@ -2,11 +2,25 @@
 {% load static %}
 {% block title %} <title>Авторизация</title> {% endblock %}
 {% block content %}
+
+{% if form.errors %}
+  <p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+{% if next %}
+  {% if user.is_authenticated %}
+    <p>Your account doesn't have access to this page. To proceed,
+    please login with an account that has access.</p>
+  {% else %}
+    <p>Please login to see this page.</p>
+  {% endif %}
+{% endif %}
     <div class="header_text"><h4>ВОЙДИТЕ В ВАШ АККАУНТ</h4></div>
     <div class="section_login">
     <div class="left_content col-5"></div>
     <div class="center_content col-4">
-    <form>
+    <form method="post" action="{% url 'login' %}">
+{% csrf_token %}
     {% comment %} <p class="alert-danger">Sorry, wrong password</p> {% endcomment %}
         <div class="form-inline mb-2">
             <label class="mr-4" for="usr">Логин</label>

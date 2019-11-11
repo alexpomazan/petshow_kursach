@@ -4,7 +4,7 @@
     {% load staticfiles %}
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <link rel="shortcut icon" type="image/png" href="{% static 'images/logo.jpg' %}"/>
+    <link rel="shortcut icon" type="image/png" href="{% static "images/favicon.png" %}"/>
         <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}"/>
     <link rel="stylesheet" href="{% static "css/style.css" %}"/>
    {% block title %} <title>Pet Show</title> {% endblock %}
@@ -13,10 +13,11 @@
 <div class="wrapper">
 <header>
  <div class="left_header_container col-4">
-    <div class="main_link"> 
+    <a href="{% url 'home' %}"><div class="main_link"> 
       <img class="logo" src="{% static "images/logo.png"%}">
       <h6>Выставка домашних животных</h6>
       </div>
+      </a>
       </div>
       <div class="right_header_container col-8">
         <nav class="col-9">
@@ -45,21 +46,21 @@
     </ol>
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="{% static "images/back_login.jpeg"%}" class="d-block w-100" alt="...">
+        <img src="{% static "images/back_login.jpeg"%}" class="d-block w-100 h-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
           <h5>First slide label</h5>
           <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
         </div>
       </div>
       <div class="carousel-item">
-        <img src="{% static "images/back_login.jpeg"%}" class="d-block w-100" alt="...">
+        <img src="{% static "images/back_login.jpeg"%}" class="d-block w-100 h-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
           <h5>Second slide label</h5>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         </div>
       </div>
       <div class="carousel-item">
-        <img src="{% static "images/back_login.jpeg"%}" class="d-block w-100" alt="...">
+        <img src="{% static "images/back_login.jpeg"%}" class="d-block w-100 h-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
           <h5>Third slide label</h5>
           <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
@@ -94,4 +95,3 @@
 <script src="{% static "js/bootstrap.min.js" %}"></script>
 </body>
 </html>
-

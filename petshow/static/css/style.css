@@ -4,22 +4,24 @@
 }
 html,
 body {
-	height: 100%;
+  height: 100%;
 }
 .wrapper {
-	display: flex;
-	flex-direction: column;
-	min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
 }
 .main_container {
   display: flex;
-	flex: 1 0 auto;
+  flex: 1 0 auto;
 }
-
-.col-9,.col-8,.col-6,.col-4{
+.col-9,
+.col-8,
+.col-6,
+.col-4 {
   padding: 0;
 }
- /* HEADER */
+/* HEADER */
 header {
   display: flex;
   flex-flow: row nowrap;
@@ -33,23 +35,26 @@ header {
   display: flex;
   flex-flow: row nowrap;
 }
-.left_header_container{
+.left_header_container {
   background: #f6f2e7;
+}
+.left_header_container > a:hover {
+  text-decoration: none;
 }
 .right_header_container {
   justify-content: space-between;
 }
-.main_link{
+.main_link {
   text-align: center;
-    display: flex;
-    width: 100%;
-    align-items: center;
-    justify-content: center;
-    color: black;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  color: black;
   padding: 5px;
 }
 .logo {
-    padding-right: 15px;
+  padding-right: 15px;
   width: 160px;
   height: 70px;
 }
@@ -59,28 +64,28 @@ li {
 nav {
   background: #f0dfb4;
 }
-.authorization{
+.authorization {
   background: #bfb5b3;
   color: black;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
 }
-.authorization > a{
+.authorization > a {
   color: black;
 }
-.logo_authorization{
+.logo_authorization {
   width: 30px;
   height: 30px;
   margin: 10px;
 }
 ul {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin: 0;
   list-style-type: none;
 }
@@ -102,13 +107,13 @@ a:hover {
 /* /HEADER */
 
 /* CONTENT BASE.HTML*/
-.bd-example{
-height: 100%;
-width: 100%;
+.bd-example {
+  height: 100%;
+  width: 100%;
 }
 .left_box {
   width: 50%;
-   color: black;
+  color: black;
   background-color: #f6c866;
   /* display: flex;
   flex-flow: column nowrap;
@@ -150,35 +155,40 @@ width: 100%;
 /* CONTENT LOGIN.HTML*/
 .section_login {
   display: flex;
-	flex: 1 0 auto;
+  flex: 1 0 auto;
 }
-.section_login{
+.section_login {
   justify-content: space-between;
 }
-.left_content{
-  background: linear-gradient( rgba(189, 189, 189, 0.5) , rgba(189, 189, 189, 0.5) ), url(/static/images/back_login.jpeg) center;
+.left_content {
+  background: linear-gradient(
+      rgba(189, 189, 189, 0.5),
+      rgba(189, 189, 189, 0.5)
+    ),
+    url(/static/images/back_login.jpeg) center;
   -webkit-background-size: cover;
-  -moz-background-size:  cover;
+  -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
 }
-.center_content, .right_content{
+.center_content,
+.right_content {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.right_content{
-  text-align:  center;
+.right_content {
+  text-align: center;
 }
-.center_content{
+.center_content {
   background: rgb(231, 231, 231);
 }
-.header_text{
-background: orange;
-height: 55px;
+.header_text {
+  background: orange;
+  height: 55px;
 }
-.header_text > h4{
+.header_text > h4 {
   margin: 10px;
   color: white;
 }
@@ -186,20 +196,24 @@ height: 55px;
 /* /CONTENT LOGIN.HTML*/
 
 /* CONTENT SIGNUP.HTML */
-.section_signup{
-  background: linear-gradient( rgba(255, 255, 255, 0.9) , rgba(255, 255, 255, 0.9) ), url(/static/images/back_signup.jpg) center;
+.section_signup {
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.9),
+      rgba(255, 255, 255, 0.9)
+    ),
+    url(/static/images/back_signup.jpg) center;
   -webkit-background-size: cover;
-  -moz-background-size:  cover;
+  -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-	flex: 1 0 auto;
+  flex: 1 0 auto;
 }
-.section_signup > form >.btn{
-transform: translateX(75%);
+.section_signup > form > .btn {
+  transform: translateX(75%);
 }
 
 /* /CONTENT SIGNUP.HTML */
