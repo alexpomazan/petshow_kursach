@@ -26,6 +26,10 @@ def competition(request, number):
     question = Question.objects.filter(id=number)
     return render(request, 'competition.html', {'answers': answers, 'questions': question})
 
+def home(request):
+    tags = Tag.objects.all()
+    context = {'tags': tags}
+    return render(request, 'base.html', context=context)
 
 def new_competition(request):
     tags = Tag.objects.all()

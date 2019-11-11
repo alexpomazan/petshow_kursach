@@ -102,15 +102,18 @@ a:hover {
 /* /HEADER */
 
 /* CONTENT BASE.HTML*/
+.bd-example{
+height: 100%;
+width: 100%;
+}
 .left_box {
-  z-index: 0;
   width: 50%;
-  color: black;
+   color: black;
   background-color: #f6c866;
-  display: flex;
+  /* display: flex;
   flex-flow: column nowrap;
   justify-content: center;
-  align-items: center;
+  align-items: center;  */
 }
 .right_box {
   z-index: 0;
