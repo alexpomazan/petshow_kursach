@@ -85,6 +85,7 @@ AUTHENTICATION_BACKENDS = (
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_URL = '/accounts/login/'
+SUCCESS_URL = '/'
 WSGI_APPLICATION = 'website.wsgi.application'
 
 # Database

@@ -4,7 +4,7 @@
 {% block content %}
     <div class="header_text"><h4>РЕГИСТРАЦИЯ УЧЕТНОЙ ЗАПИСИ</h4></div>
     <div class="section_signup">
-    <p>Создайте учетную запись, чтобы иметь полный доступ ко всем возможностям сайта.</p>
+    {% comment %} <p>Создайте учетную запись, чтобы иметь полный доступ ко всем возможностям сайта.</p> {% endcomment %}
     <form method="post">
     {% csrf_token %}
     {{ form.as_p }}

@@ -23,9 +23,9 @@
         <nav class="col-9">
           <ul>
             <li><a href="{% url 'home' %}">На главную</a></li>
-            <li><a href="#">Выставки</a></li>
-            <li><a href="#">Форум</a></li>
-            <li><a href="#">О нас</a></li>
+            <li><a href="{% url 'shows' %}">Выставки</a></li>
+            <li><a href="{% url 'article' %}">Статьи</a></li>
+            <li><a href="{% url 'about_us' %}">О нас</a></li>
           </ul>
         </nav>
       
@@ -35,8 +35,8 @@
          <a href= "{% url 'logout' %}">Выйти</a>
          <a href="{% url 'password_change' %}">Сменить пароль</a>
           {%else%}
-        <img class="logo_authorization" src="{% static "images/authorization.png"%}">
-        <a href= "{% url 'login' %}">Авторизация</a>
+          <a href= "{% url 'login' %}">
+        <img class="logo_authorization" src="{% static "images/authorization.png"%}">Авторизация</a>
           {%endif%}
         </div>
       </div>
@@ -44,7 +44,11 @@
     {% block content %}
     <div class="main_container">
       <div class="left_box">
-    <div class="bd-example">
+      <div class = "welcome_text">
+<p>Добро пожаловать на наш сайт!</p>
+<p>У нас ваш петомец может принять участие в выставке, а так же вы можете почитать и написать интерессные статьи.<br>
+Чтобы открыть основные возможности зарегистрируйтесь!</p>
+      </div>
   <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
       <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
@@ -53,26 +57,25 @@
     </ol>
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="{% static "images/back_login.jpeg"%}" class="d-block w-100 h-100" alt="...">
+        <img src="{% static "images/dog_show.png"%}" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
           <h5>First slide label</h5>
           <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
         </div>
       </div>
       <div class="carousel-item">
-        <img src="{% static "images/back_login.jpeg"%}" class="d-block w-100 h-100" alt="...">
+        <img src="{% static "images/cat_show.png"%}" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
           <h5>Second slide label</h5>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         </div>
       </div>
       <div class="carousel-item">
-        <img src="{% static "images/back_login.jpeg"%}" class="d-block w-100 h-100" alt="...">
+        <img src="{% static "images/back_login.jpeg"%}" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
           <h5>Third slide label</h5>
           <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
         </div>
-      </div>
     </div>
     <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>

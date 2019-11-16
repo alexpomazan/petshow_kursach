@@ -28,6 +28,14 @@ def signup(request):
 def login(request):
     return render(request, 'registration/login.html')
 
+def shows(request):
+    return render(request, 'shows.html')
+
+def article(request):
+    return render(request, 'article.html')
+
+def about_us(request):
+    return render(request, 'about_us.html')
 
 def cabinet(request):
     return render(request, 'cabinet.html')

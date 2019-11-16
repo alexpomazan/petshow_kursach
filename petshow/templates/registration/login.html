@@ -32,6 +32,8 @@
         </div>
         {% endcomment %}
         <input type="submit" class="btn btn-outline-success" value="Войти">
+        <p>Забыли пароль? Восстановите по ссылке ниже.</p>
+        <a href={% url 'password_reset' %}>Восстановить пароль</a>
     </form>
     </div>
         <div class="right_content col-3">
