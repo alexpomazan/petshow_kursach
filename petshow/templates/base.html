@@ -18,7 +18,7 @@
       <h6>Выставка домашних животных</h6>
       </div>
       </a>
-      </div>
+      </div> 
       <div class="right_header_container col-8">
         <nav class="col-9">
           <ul>
@@ -30,10 +30,18 @@
         </nav>
       
         <div class = "authorization col-3">
-          {% if user.is_authenticated%}
-         <p>Welcome, {{user.username}}!</p>
-         <a href= "{% url 'logout' %}">Выйти</a>
-         <a href="{% url 'password_change' %}">Сменить пароль</a>
+        {% if user.is_authenticated%}
+        <div class="dropdown">
+  <button class="btn btn btn-lg dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    {{user.username}}
+  </button>
+  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+    <a class="dropdown-item" href= "{% url 'logout' %}">Выйти</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="{% url 'password_change' %}">Сменить пароль</a>
+  </div>
+         {% comment %} <a href= "{% url 'logout' %}">Выйти</a>
+         <a href="{% url 'password_change' %}">Сменить пароль</a> {% endcomment %}
           {%else%}
           <a href= "{% url 'login' %}">
         <img class="logo_authorization" src="{% static "images/authorization.png"%}">Авторизация</a>
@@ -100,8 +108,11 @@
     </div>
 </footer>
 </div>
-<script src="{% static "js/jquery.min.js" %}"></script>
-<script src="{% static "js/popper.min.js" %}"></script>
-<script src="{% static "js/bootstrap.min.js" %}"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+{% comment %} <script src="{% static "js/jquery.min.js" %}"></script> {% endcomment %}
+{% comment %} <script src="{% static "js/popper.min.js" %}"></script>
+<script src="{% static "js/bootstrap.min.js" %}"></script> {% endcomment %}
 </body>
 </html>

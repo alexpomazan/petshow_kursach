@@ -1,40 +1,23 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 {% load static %}
 {% block title %} <title>Авторизация</title> {% endblock %}
 {% block content %}
-
-{% comment %} {% if form.errors %}
-  <p>Your username and password didn't match. Please try again.</p>
-{% endif %}
-
-{% if next %}
-  {% if user.is_authenticated %}
-    <p>Your account doesn't have access to this page. To proceed,
-    please login with an account that has access.</p>
-  {% else %}
-    <p>Please login to see this page.</p>
-  {% endif %}
-{% endif %} {% endcomment %}
     <div class="header_text"><h4>ВОЙДИТЕ В ВАШ АККАУНТ</h4></div>
     <div class="section_login">
     <div class="left_content col-5"></div>
     <div class="center_content col-4">
-    <form method="post">
+    <div class="card">
+        <div class="card-body">
+    <form method="post" novalidate>
     {% csrf_token %}
-    {{ form.as_p }}
-        {% comment %} <div class="form-inline mb-2">
-            <label class="mr-4" for="usr">Логин</label>
-            <input type="text" class="form-control" id="login" placeholder="Введите логин">
-        </div>
-        <div class="form-inline mb-2">
-            <label class="mr-3" for="comment">Пароль</label>
-            <input class="form-control" type="password"  id="passwd" placeholder=" Введите пароль">
-        </div>
-        {% endcomment %}
+    {{ form|crispy }}
         <input type="submit" class="btn btn-outline-success" value="Войти">
         <p>Забыли пароль? Восстановите по ссылке ниже.</p>
         <a href={% url 'password_reset' %}>Восстановить пароль</a>
     </form>
+    </div>
+    </div>
     </div>
         <div class="right_content col-3">
         <p>Нет учетной записи? Зарегистрируйтесь!</p>

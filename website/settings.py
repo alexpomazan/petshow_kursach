@@ -37,12 +37,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'petshow',
+    'crispy_forms',
 
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google'
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 SITE_ID = 1
 
 MIDDLEWARE = [
@@ -83,6 +87,7 @@ AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend',
 )
 LOGIN_REDIRECT_URL = '/'
+SIGNUP_URL = '/accounts/login/'
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_URL = '/accounts/login/'
 SUCCESS_URL = '/'

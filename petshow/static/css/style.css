@@ -118,14 +118,13 @@ a:hover {
 .left_box {
   width: 50%;
   color: black;
-  background-color:#f0dfb4;
+  background-color: #f0dfb4;
   /* display: flex;
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;  */
 }
-.carousel-caption{
-
+.carousel-caption {
 }
 .welcome_text {
   text-align: center;
@@ -174,7 +173,6 @@ a:hover {
 }
 /* /FOOTER */
 
-
 /* CONTENT LOGIN.HTML*/
 .section_login {
   display: flex;
@@ -202,13 +200,9 @@ a:hover {
 .right_content {
   text-align: center;
 }
-.center_content {
+.center_content,
+.card {
   background: rgb(231, 231, 231);
-}
-.center_content > form{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 .header_text {
   background: orange;
@@ -219,7 +213,6 @@ a:hover {
   color: white;
 }
 /* /CONTENT LOGIN.HTML*/
-
 
 /* CONTENT SIGNUP.HTML */
 .section_signup {
@@ -233,43 +226,47 @@ a:hover {
   -o-background-size: cover;
   background-size: cover;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   flex: 1 0 auto;
 }
-.section_signup > form{
+.section_signup > form {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
+#hint_id_password1,
+#hint_id_password2,
+#hint_id_username {
+  display: none;
+}
 /* /CONTENT SIGNUP.HTML */
 
-
 /* CONTENT ARTICLE.HTML */
-.section_article{
-display: flex;
-justify-content: center;
-align-items: center;
-flex: 1 0 auto;
+.section_article {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1 0 auto;
 }
 /* /CONTENT ARTICLE.HTML */
 
-
 /* CONTENT ABOUT_US.HTML */
-.section_about_us{
+.section_about_us {
   display: flex;
   justify-content: center;
   align-items: center;
   flex: 1 0 auto;
-  }
+}
 /* /CONTENT ABOUT_US.HTML */
 
 /* CONTENT SHOWS.HTML */
-.section_shows{
+.section_shows {
   display: flex;
   justify-content: center;
   align-items: center;
   flex: 1 0 auto;
-  }
+}
 /* /CONTENT SHOWS.HTML */
