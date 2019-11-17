@@ -36,7 +36,7 @@ header {
   flex-flow: row nowrap;
 }
 .left_header_container {
-  background: #f6f2e7;
+  background: linear-gradient(90deg, #f6f2e7 90%, #f0dfb4);
 }
 .left_header_container > a:hover {
   text-decoration: none;
@@ -62,7 +62,7 @@ li {
   float: left;
 }
 nav {
-  background: #f0dfb4;
+  background: linear-gradient(90deg, #f0dfb4 80%, #bfb5b3);
 }
 .authorization {
   background: #bfb5b3;
@@ -200,9 +200,11 @@ a:hover {
 .right_content {
   text-align: center;
 }
-.center_content,
-.card {
+.center_content {
   background: rgb(231, 231, 231);
+}
+.card{
+  background: none;
 }
 .header_text {
   background: orange;
@@ -270,3 +272,25 @@ a:hover {
   flex: 1 0 auto;
 }
 /* /CONTENT SHOWS.HTML */
+
+
+/* CONTENT password_change_form.html */
+.section_password_change{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1 0 auto;
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.9),
+      rgba(255, 255, 255, 0.9)
+    ),
+    url(/static/images/back_signup.jpg) center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+#hint_id_new_password1{
+  display: none;
+}
+/* /CONTENT password_change_form.html */
