@@ -29,7 +29,8 @@ ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com', 'localhost']
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    'grappelli',
+    'django.contrib.admin', 
     'django.contrib.auth',
     'django.contrib.sites',
     'django.contrib.contenttypes',
@@ -39,13 +40,23 @@ INSTALLED_APPS = [
     'petshow',
     'crispy_forms',
 
+
+
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google'
 ]
-
+ 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'aleksey.pomazan@gmail.com'
+EMAIL_HOST_PASSWORD = 'VFVFkjd3211'
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
 
 SITE_ID = 1
 

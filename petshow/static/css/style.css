@@ -3,7 +3,7 @@
   margin: 0;
 }
 html,
-body {
+body{
   height: 100%;
 }
 .wrapper {
@@ -294,3 +294,25 @@ a:hover {
   display: none;
 }
 /* /CONTENT password_change_form.html */
+
+
+/* CONTENT ABOUT US */
+.section-contact{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1 0 auto;
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0.5)
+    ),
+    url(/static/images/back_about_us.png) center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.card-contact{
+  width: 600px;
+}
+/* /CONTENT ABOUT US */
