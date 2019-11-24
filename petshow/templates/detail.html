@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} <title>{{article.article_title}}</title> {% endblock %}
+{% block content %}
+<div class = "section_detail">
+<div class="article">
+    <h2>{{article.article_title}}</h2>
+    <p>{{article.article_text}}</p>
+    <em>{{article.pub_date}}</em>
+ </div>
+<hr>
+<div class="comments">
+<p> Комментариии: </p>
+{% if latest_comments_list %}
+    {% for c in latest_comments_list %}
+    <p>
+    <strong>{{c.author_name}}</strong>
+    <p>{{c.comment_text}}</p>
+    </p>
+    {% endfor %}
+{% else %}
+Комментариев нет
+{% endif %}
+</div>
+<hr>
+<div class="comments_form">
+<p>Оставить комментарий</p>
+<form action="{% url 'leave_comment' article.id  %}" method="post" novalidate>
+{% csrf_token %}
+<input type="text" required placeholder="Ваше имя" name="name"><br>
+<textarea name="text" required="" placeholder="Текст комментария" cols="30" rows="10"></textarea><br>
+	<input type="submit" class="btn btn-success" value="Отправить сообщение"/> 
+</form>
+</div>
+</div>
+{% endblock %}

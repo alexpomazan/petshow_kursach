@@ -3,6 +3,12 @@
 {% block title %} <title>Статьи</title> {% endblock %}
 {% block content %}
 <div class = "section_article">
-
+    {% if latest_articles_list %}
+        {% for a in latest_articles_list %}
+            <a href="{% url 'detail' a.id %}">{{a.article_title}}</a>
+        {% endfor %}
+    {% else %}
+        Статьи не найдены!
+    {% endif %}
 </div>
 {% endblock %}
