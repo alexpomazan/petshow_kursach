@@ -246,6 +246,42 @@ a:hover {
 }
 /* /CONTENT SIGNUP.HTML */
 
+
+/* CONTENT PROFILE.HTML */
+.section-profile{
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  flex-direction: column;
+  flex: 1 0 auto;
+  background: linear-gradient(
+      rgb(255, 255, 255, 0.8),
+      rgb(255, 255, 255, 0.1)
+    ),
+    url(/static/images/back_profile.jpg) center;
+}
+.card-profile{
+  width: 600px;
+  background: rgb(255, 255, 255, 0.7);
+}
+/* .account-heading{
+  color: white;
+}
+.text-secondary{
+  color: antiquewhite;
+} */
+.profile_info{
+  padding: 15px;
+}
+.media-body{
+  padding-left: 10px;
+}
+.custom-file > a{
+  display: none;
+}
+/* /CONTENT PROFILE.HTML */
+
+
 /* CONTENT ARTICLE.HTML */
 .section_article {
   display: flex;

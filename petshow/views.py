@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib import auth
 from .models import *
 import re
+from django.contrib import messages
 from django.urls import reverse
 from django.http import Http404, HttpResponse, HttpResponseRedirect
-from .forms import ContactForm
+from .forms import ContactForm, UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 from django.core.mail import BadHeaderError, send_mail
 from .models import Article, Comment 
  
@@ -17,18 +17,41 @@ def home(request):
 
 def signup(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = UserRegisterForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('home')
+            username = form.cleaned_data.get('username')
+            messages.success(request, f'Ваш акккаунт был создан! Вы можете войти в него')
+            return redirect('login')
     else:
-        form = UserCreationForm()
+        form = UserRegisterForm()
     return render(request, 'registration/signup.html', {
         'form': form
     })
  
 def login(request):
     return render(request, 'registration/login.html')
+
+
+def profile(request):
+    if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f'Ваш аккаунт был обновлен!')
+            return redirect('profile')
+ 
+    else:
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.profile)
+
+    context = {
+        'u_form': u_form,
+        'p_form': p_form
+    }
+    return render(request, 'profile.html',context)
 
 def shows(request):
     return render(request, 'shows.html')
