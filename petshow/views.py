@@ -54,8 +54,21 @@ def profile(request):
     return render(request, 'profile.html',context)
 
 def shows(request):
-    return render(request, 'shows.html')
+    
+    return render(request, 'show/shows.html')
 
+def mypets(request):
+    
+    return render(request, 'show/mypets.html')
+
+def dogshow(request):
+    
+    return render(request, 'show/dogshow.html')
+
+def catshow(request):
+    
+    return render(request, 'show/catshow.html')
+    
 def articles(request):
     latest_articles_list = Article.objects.order_by('-pub_date')[:5 ]
     return render(request, 'article.html', {'latest_articles_list': latest_articles_list})
@@ -85,14 +98,12 @@ def cabinet(request):
 def contactform(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
-        # Если форма заполнена корректно, сохраняем все введённые пользователем значения
         if form.is_valid():
             subject = form.cleaned_data['subject']
             sender_name = auth.get_user(request).username
             sender_email = form.cleaned_data['email']
-            message = message = "{0} has sent you a new message:\n\n{1} \n\n email user: {2}".format(sender_name, form.cleaned_data['message'], form.cleaned_data['email']) 
+            message = message = "Отправил вам новое сообщение{0}\n\n{1} \n\n Email пользователя: {2}".format(sender_name, form.cleaned_data['message'], form.cleaned_data['email']) 
             send_mail(subject, message, sender_email, ['aleksey.pomazan@gmail.com'])
-            # send email code goes here
             return HttpResponseRedirect('http://localhost:8000/thanks/')
 
     else:

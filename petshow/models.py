@@ -7,6 +7,25 @@ from django.dispatch import receiver
 from django.utils import timezone
 import datetime
 from PIL import Image
+from vote.models import VoteModel
+
+# class ArticleReview(VoteModel, models.Model):
+
+# class PetOnShow(models.Model):
+#     gender_choices = (
+#         ('Female'),
+#         ('Male')
+#     )
+#     nick = models.CharField(max_length=100)
+#     gender = models.CharField(max_length=50, choices=gender_choices, default='Male')
+#     age = models.DateField(auto_now_add=True)
+#     breed = models.CharField(max_length=50)
+#     image = models.ImageField(upload_to='pets_pics')
+#     users = models.ManyToManyField(User, blank=True)
+#     info = models.TextField(blank=True)
+
+#     def __str__(self):
+#         return self.nick
 
 class Article(models.Model):
     article_title = models.CharField('название статьи', max_length = 200)
@@ -46,3 +65,6 @@ class Profile(models.Model):
         #     output_size = (150, 150)
         #     img.thumbnail(output_size)
         #     img.save(self.image.path)
+
+
+
