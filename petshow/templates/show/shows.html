@@ -4,7 +4,7 @@
 {% block content %}
 <div class = "section_shows">
 <div class="second-header">
-<div class="dropdown dropdown-shows col-7">
+{% comment %} <div class="dropdown dropdown-shows col-7">
         <button class="btn btn btn-lg dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
          Категории
         </button>
@@ -12,11 +12,11 @@
             <a class="dropdown-item" href= "{% url 'dogshow' %}">Выставка собак</a>
             <a class="dropdown-item" href= "{% url 'catshow' %}">Выставка кошек</a>
             </div>
-    </div>
-<nav class="nav-shows col-5">
+    </div> {% endcomment %}
+<nav class="nav-shows">
           <ul class="ul">
           {% if user.is_authenticated%}
-            <li class="li"><a href="{% url 'mypets' %}">Ваши питомцы</a></li>
+            <li class="li"><a class="link_mypets" href="{% url 'mypets' %}">Ваши питомцы</a></li>
             {% else %}
             <li class="li"><a href="" data-toggle="modal" data-target="#exampleModalCenter">Ваши питомцы</a></li>
             <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -40,13 +40,15 @@
 </div>
 <div class="content-show">
 <div class="category_selection">
-  <a href= "{% url 'dogshow' %}">
+  <a class="link_dog_category" href= "{% url 'dogshow' %}">
   <div class="dog_category">
+  <h4 class="show_name">Выставка собак</h4>
   <img class="dog_img" src="{% static "images/dog.png"%}">
   </div>
   </a>
-  <a href= "{% url 'catshow' %}">
+  <a class="link_cat_category" href= "{% url 'catshow' %}">
   <div class="cat_category">
+  <h4 class="show_name">Выставка кошек</h4>
   <img class="cat_img" src="{% static "images/cat1.png"%}">
   </div>
   </a>

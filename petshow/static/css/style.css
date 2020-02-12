@@ -373,7 +373,7 @@ ol {
   display: flex;
   flex-direction: row;
   width: 100%;
-  height: 80px;
+  height: 70px;
   background: cornsilk;
 }
 .dropdown-shows{
@@ -396,22 +396,34 @@ ol {
   flex-direction: row;
   align-items: center;
   justify-content: flex-end;
+  width: 100%;
 }
 .category_selection{
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
+.show_name{
+text-align: center;
+}
 .cat_img, .dog_img{
 padding: 20px;
 width: 350px;
 height: 400px;
 }
-.cat_category:hover, .dog_category:hover{
+.link_mypets{
+font-size: 18px;
+}
+.link_cat_category, .link_dog_category{
+  color: black;
+}
+.link_cat_category:hover, .link_dog_category:hover{
   background: linear-gradient(
     rgba(199, 193, 193, 0.9),
     rgba(255, 255, 255, 0.9)
   );
+  color:white;
+  text-decoration: none;
 }
 /* /CONTENT SHOWS.HTML */
 
