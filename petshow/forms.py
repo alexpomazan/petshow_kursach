@@ -4,11 +4,12 @@ from django.contrib.auth.forms import UserCreationForm
 from phone_field import PhoneField
 from .models import *
 
-# class NewPetOnShow(forms.ModelForm):
+
+# class ArticleForm(forms.ModelForm):
 #     class Meta:
 #         model = PetOnShow
-#         fields = "__all__"
-#         labels = {"Nick": "Кличка"}
+# ...         fields = ['pub_date', 'headline', 'content', 'reporter']
+
 
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField()

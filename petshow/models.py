@@ -5,27 +5,46 @@ from django.contrib import auth
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils import timezone
+from django.core.validators import MaxValueValidator, MinValueValidator 
 import datetime
 from PIL import Image
-from vote.models import VoteModel
+# from vote.models import VoteModel
 
 # class ArticleReview(VoteModel, models.Model):
 
-# class PetOnShow(models.Model):
-#     gender_choices = (
-#         ('Female'),
-#         ('Male')
-#     )
-#     nick = models.CharField(max_length=100)
-#     gender = models.CharField(max_length=50, choices=gender_choices, default='Male')
-#     age = models.DateField(auto_now_add=True)
-#     breed = models.CharField(max_length=50)
-#     image = models.ImageField(upload_to='pets_pics')
-#     users = models.ManyToManyField(User, blank=True)
-#     info = models.TextField(blank=True)
 
-#     def __str__(self):
-#         return self.nick
+class PetOnShow(models.Model):
+    class GenderChoice:
+        FEMALE = 'female'
+        MALE = 'male'
+
+        choices = (
+            (FEMALE, 'female'),
+            (MALE, 'male'),
+        )
+
+    class ShowChoices:
+        DOGS = 'dogs'
+        CATS = 'cats'
+        choices = (
+            (DOGS, 'dogs'),
+            (CATS, 'cats'),
+        )
+
+    nick = models.CharField('Кличка', max_length=100)
+    gender = models.CharField('Пол', max_length=50, choices=GenderChoice.choices, default=GenderChoice.MALE)
+    age = models.IntegerField('Возвраст', validators=[MinValueValidator(1), MaxValueValidator(30)])
+    breed = models.CharField('Порода', max_length=50)
+    image = models.ImageField('Фото', upload_to='pets_pics')
+    likes = models.ManyToManyField(User, blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='pets')
+    info = models.TextField('Информация о питомце', blank=True)
+    show = models.CharField(max_length=10, choices=ShowChoices.choices, blank=True, null=True, default=None)
+    can_vote_before_date = models.DateTimeField(blank=True, null=True, default=None)
+
+    def __str__(self):
+        return self.nick
+
 
 class Article(models.Model):
     article_title = models.CharField('название статьи', max_length = 200)

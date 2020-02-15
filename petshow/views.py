@@ -1,10 +1,13 @@
-from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib import auth
+from django.views.generic import CreateView
+
 from .models import *
 import re
 from django.contrib import messages
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from .forms import ContactForm, UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 from django.core.mail import BadHeaderError, send_mail
@@ -57,17 +60,98 @@ def shows(request):
     
     return render(request, 'show/shows.html')
 
+
+class CreatePetOnShow(CreateView):
+    model = PetOnShow
+    fields = ('nick', 'gender', 'age', 'breed', 'image', 'info')
+    template_name = 'show/add_pet.html'
+    success_url = reverse_lazy('mypets')
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+@login_required
 def mypets(request):
-    
-    return render(request, 'show/mypets.html')
+    if request.method == 'POST':
+        pet = get_object_or_404(PetOnShow, id=request.POST['pet'])
+        if not pet.show:
+            if request.POST.get('show') in (PetOnShow.ShowChoices.DOGS, PetOnShow.ShowChoices.CATS):
+                pet.show = request.POST['show']
+                pet.save()
+                return redirect('mypets')
+    context = {
+        'pets': request.user.pets.order_by('-id'),
+    }
+    return render(request, 'show/mypets.html', context=context)
+
+
+@login_required
+def start_show(request, slug):
+    if request.user.is_superuser:
+        if slug in (PetOnShow.ShowChoices.DOGS, PetOnShow.ShowChoices.CATS):
+            PetOnShow.objects.filter(show=slug).update(can_vote_before_date=timezone.now())
+            if slug == PetOnShow.ShowChoices.DOGS:
+                return redirect('dogshow')
+            else:
+                return redirect('catshow')
+
+
+@login_required
+def stop_show(request, slug):
+    if request.user.is_superuser:
+        if slug in (PetOnShow.ShowChoices.DOGS, PetOnShow.ShowChoices.CATS):
+            PetOnShow.objects.filter(show=slug).update(can_vote_before_date=None)
+            if slug == PetOnShow.ShowChoices.DOGS:
+                return redirect('dogshow')
+            else:
+                return redirect('catshow')
+
+
+@login_required
+def vote_plus(request, pet_id):
+    pet = get_object_or_404(PetOnShow, id=pet_id)
+    if not pet.likes.filter(id=request.user.id).exists():
+        pet.likes.add(request.user)
+        pet.save()
+    if pet.show == PetOnShow.ShowChoices.DOGS:
+        return redirect('dogshow')
+    elif pet.show == PetOnShow.ShowChoices.CATS:
+        return redirect('catshow')
+
+
+@login_required
+def vote_minus(request, pet_id):
+    pet = get_object_or_404(PetOnShow, id=pet_id)
+    if pet.likes.filter(id=request.user.id).exists():
+        pet.likes.remove(request.user)
+        pet.save()
+    if pet.show == PetOnShow.ShowChoices.DOGS:
+        return redirect('dogshow')
+    elif pet.show == PetOnShow.ShowChoices.CATS:
+        return redirect('catshow')
+
 
 def dogshow(request):
-    
-    return render(request, 'show/dogshow.html')
+    slug = PetOnShow.ShowChoices.DOGS
+    context = {
+        'pets': PetOnShow.objects.filter(show=slug),
+        'title': 'Выставка собак',
+        'slug': slug,
+    }
+    return render(request, 'show/show.html', context=context)
+
 
 def catshow(request):
-    
-    return render(request, 'show/catshow.html')
+    slug = PetOnShow.ShowChoices.CATS
+    context = {
+        'pets': PetOnShow.objects.filter(show=slug),
+        'title': 'Выставка кошек',
+        'slug': slug,
+    }
+    return render(request, 'show/show.html', context=context)
     
 def articles(request):
     latest_articles_list = Article.objects.order_by('-pub_date')[:5 ]
