@@ -8,10 +8,6 @@ from django.utils import timezone
 from django.core.validators import MaxValueValidator, MinValueValidator 
 import datetime
 from PIL import Image
-# from vote.models import VoteModel
-
-# class ArticleReview(VoteModel, models.Model):
-
 
 class PetOnShow(models.Model):
     class GenderChoice:
@@ -41,10 +37,10 @@ class PetOnShow(models.Model):
     info = models.TextField('Информация о питомце', blank=True)
     show = models.CharField(max_length=10, choices=ShowChoices.choices, blank=True, null=True, default=None)
     can_vote_before_date = models.DateTimeField(blank=True, null=True, default=None)
+    is_winner = models.BooleanField(default=False)
 
     def __str__(self):
         return self.nick
-
 
 class Article(models.Model):
     article_title = models.CharField('название статьи', max_length = 200)
@@ -57,13 +53,10 @@ class Article(models.Model):
     def was_published_recently(self):
         return self.pub_date >= (timezone.now() - datetime.timedelta(days = 7))
 
-# def content_user_name(reguest):
-#     return auth.get_user(reguest).username
-
 class Comment(models.Model):
     article = models.ForeignKey(Article, on_delete = models.CASCADE)
     author_name = models.CharField('имя автора', max_length=200)
-    comment_text = models.CharField('текст комментария' , max_length=200)
+    comment_text = models.CharField('текст комментария:' , max_length=200)
  
     def __str__(self):
         return self.author_name
@@ -77,13 +70,5 @@ class Profile(models.Model):
 
     def save(self, *args, **kwargs):
         super(Profile, self).save(*args, **kwargs)
-
-        # img = Image.open(self.image.path)
-
-        # if img.height >300 or img.width > 300:
-        #     output_size = (150, 150)
-        #     img.thumbnail(output_size)
-        #     img.save(self.image.path)
-
 
 

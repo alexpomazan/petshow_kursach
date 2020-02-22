@@ -35,7 +35,7 @@
                     <tbody>
                     {% for pet in pets %}
                     <tr>
-                        <td>{{ pet.nick }}</td>
+                        <td>{{ pet.nick }}{% if pet.is_winner %}</br><h5 style="color: darkgreen;"><b>Победитель</b></h5>{% endif %}</td>
                         <td>{{ pet.gender }}</td>
                         <td>{{ pet.age }}</td>
                         <td>{{ pet.breed }}</td>

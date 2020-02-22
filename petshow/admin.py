@@ -4,4 +4,6 @@ from .models import Profile
 
 admin.site.register(Profile)
 admin.site.register(Article)
+admin.site.register(Comment)
 admin.site.register(PetOnShow)
+

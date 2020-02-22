@@ -1,15 +1,16 @@
 from django.contrib.auth.decorators import login_required
+from django.db.models import Count
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib import auth
 from django.views.generic import CreateView
-
+from django.views.generic import TemplateView
 from .models import *
 import re
 from django.contrib import messages
 from django.urls import reverse, reverse_lazy
 from django.http import Http404, HttpResponse, HttpResponseRedirect
-from .forms import ContactForm, UserRegisterForm, UserUpdateForm, ProfileUpdateForm
+from .forms import *
 from django.core.mail import BadHeaderError, send_mail
 from .models import Article, Comment 
  
@@ -32,8 +33,9 @@ def signup(request):
         'form': form
     })
  
-def login(request):
-    return render(request, 'registration/login.html')
+
+class LoginView(TemplateView):
+    template_name = "registration/login.html"
 
 
 def profile(request):
@@ -56,9 +58,9 @@ def profile(request):
     }
     return render(request, 'profile.html',context)
 
-def shows(request):
-    
-    return render(request, 'show/shows.html')
+
+class ShowsView(TemplateView):
+    template_name = "show/shows.html"
 
 
 class CreatePetOnShow(CreateView):
@@ -92,7 +94,10 @@ def mypets(request):
 def start_show(request, slug):
     if request.user.is_superuser:
         if slug in (PetOnShow.ShowChoices.DOGS, PetOnShow.ShowChoices.CATS):
-            PetOnShow.objects.filter(show=slug).update(can_vote_before_date=timezone.now())
+            pets = PetOnShow.objects.filter(show=slug)
+            for p in pets:
+                p.likes.clear()
+            pets.update(can_vote_before_date=timezone.now(), is_winner=False)
             if slug == PetOnShow.ShowChoices.DOGS:
                 return redirect('dogshow')
             else:
@@ -103,7 +108,22 @@ def start_show(request, slug):
 def stop_show(request, slug):
     if request.user.is_superuser:
         if slug in (PetOnShow.ShowChoices.DOGS, PetOnShow.ShowChoices.CATS):
-            PetOnShow.objects.filter(show=slug).update(can_vote_before_date=None)
+            pets = PetOnShow.objects.filter(show=slug)
+            max_count = None
+            winners = []
+            for i, (likes_count, pet_id) in enumerate(
+                    pets.annotate(q_count=Count('likes')).values_list('q_count', 'id').order_by('-q_count')
+            ):
+                if i == 0:
+                    if likes_count > 0:
+                        max_count = likes_count
+                    else:
+                        break
+                if likes_count == max_count:
+                    winners.append(pet_id)
+            if winners:
+                pets.filter(id__in=winners).update(is_winner=True)
+            pets.update(can_vote_before_date=None)
             if slug == PetOnShow.ShowChoices.DOGS:
                 return redirect('dogshow')
             else:
@@ -162,22 +182,25 @@ def detail(request, article_id):
         a = Article.objects.get( id = article_id)
     except:
         raise Http404("Статья не найдена!")
+    form=FormComment(article_id,request.user)
     latest_comments_list = a.comment_set.order_by('-id')[:10]
-    return render(request, 'detail.html', {'article': a, 'latest_comments_list': latest_comments_list})
+    context={'article': a, 'latest_comments_list': latest_comments_list,
+    'form':form}
+    return render(request, 'detail.html', context=context)
 
 def leave_comment(request, article_id):
     try:
         a = Article.objects.get( id = article_id)
     except:
         raise Http404("Статья не найдена!")
-    a.comment_set.create(author_name = request.POST['name'], comment_text = request.POST['text'])
+    form=FormComment(article_id, request.user, request.POST)
+    if form.is_valid():
+            form.save()
     return HttpResponseRedirect( reverse('detail', args=(a.id,)) )
 
-def about_us(request):
-    return render(request, 'about_us.html')
 
-def cabinet(request):
-    return render(request, 'cabinet.html')
+class AboutUsView(TemplateView):
+    template_name = "about_us.html"
 
 def contactform(request):
     if request.method == 'POST':
@@ -186,7 +209,7 @@ def contactform(request):
             subject = form.cleaned_data['subject']
             sender_name = auth.get_user(request).username
             sender_email = form.cleaned_data['email']
-            message = message = "Отправил вам новое сообщение{0}\n\n{1} \n\n Email пользователя: {2}".format(sender_name, form.cleaned_data['message'], form.cleaned_data['email']) 
+            message = message = "Пользователь: {0} отправил вам новое сообщение:\n\n{1} \n\n Email пользователя: {2}".format(sender_name, form.cleaned_data['message'], form.cleaned_data['email']) 
             send_mail(subject, message, sender_email, ['aleksey.pomazan@gmail.com'])
             return HttpResponseRedirect('http://localhost:8000/thanks/')
 

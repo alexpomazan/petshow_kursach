@@ -11,6 +11,22 @@ from .models import *
 # ...         fields = ['pub_date', 'headline', 'content', 'reporter']
 
 
+class FormComment(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = "__all__"
+        
+        widgets = {'article': forms.HiddenInput(),
+                   'author_name': forms.HiddenInput(),
+                   'comment_text': forms.Textarea(attrs={'rows': 5, 'cols': 40})}
+
+    def __init__(self, articleId, user, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['article'].queryset = Article.objects.filter(pk=articleId)
+        self.fields['author_name'].queryset = User.objects.filter(pk=user.id)
+        self.fields['article'].initial = Article.objects.get(pk=articleId)
+        self.fields['author_name'].initial = User.objects.get(pk=user.id)
+
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField()
 
@@ -36,8 +52,3 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['image']
-
-# class ShowForm(forms.ModelForm):
-#     class Meta:
-#         model = Show
-#         fields = ['image, breed, petname, aboutpet']

@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 {% load static %}
 {% block title %} <title>{{article.article_title}}</title> {% endblock %}
 {% block content %}
@@ -10,13 +11,15 @@
  </div>
 <hr>
 <div class="comments">
-<p> Комментариии: </p>
+<h5> Комментарии: </h5>
 {% if latest_comments_list %}
     {% for c in latest_comments_list %}
-    <p>
+    <div class='comment border rounded col-3 mb-3'>
+    <div class='m-3'>
     <strong>{{c.author_name}}</strong>
     <p>{{c.comment_text}}</p>
-    </p>
+    </div>
+    </div>
     {% endfor %}
 {% else %}
 Комментариев нет
@@ -25,12 +28,11 @@
 <hr>
 {% if user.is_authenticated%}
     <div class="comments_form">
-        <p>Оставить комментарий</p>
+        <h4>Оставить комментарий</h4>
             <form action="{% url 'leave_comment' article.id  %}" method="post" novalidate>
-              {% csrf_token %}
-              <input class="mb-2" type="text" required placeholder=" Ваше имя" name="name"><br>
-              <textarea name="text" required="" placeholder=" Текст комментария" cols="30" rows="10"></textarea><br>
-	          <input type="submit" class="btn btn-success" value="Отправить сообщение"/> 
+    {% csrf_token %}
+    {{ form|crispy }}
+	<input type="submit" class="btn btn-success w-100" value="Отправить"/>
             </form>
     </div>
 {% else %}
