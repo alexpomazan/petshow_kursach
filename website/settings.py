@@ -29,7 +29,6 @@ ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com', 'localhost']
 # Application definition
 
 INSTALLED_APPS = [
-    'grappelli',
     'django.contrib.admin', 
     'django.contrib.auth',
     'django.contrib.sites',
@@ -38,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'petshow',
-    'vote',
     'crispy_forms',
     'sorl.thumbnail',
 
