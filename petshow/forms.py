@@ -4,13 +4,6 @@ from django.contrib.auth.forms import UserCreationForm
 from phone_field import PhoneField
 from .models import *
 
-
-# class ArticleForm(forms.ModelForm):
-#     class Meta:
-#         model = PetOnShow
-# ...         fields = ['pub_date', 'headline', 'content', 'reporter']
-
-
 class FormComment(forms.ModelForm):
     class Meta:
         model = Comment
