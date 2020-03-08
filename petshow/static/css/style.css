@@ -120,8 +120,6 @@ a:hover {
   color: black;
   background-color: #f0dfb4;
 }
-.carousel-caption {
-}
 .welcome_text {
   text-align: center;
   font-family: Arial, sans-serif;
@@ -357,7 +355,13 @@ font-size: 18px;
 }
 .section_show{
   display: flex;
+  justify-content: center;
   flex: 1 0 auto;
+}
+.content_shows{
+  display: flex;
+  justify-content: center;
+  flex: 1 0 auto
 }
 .section_mypets{
   display: flex;

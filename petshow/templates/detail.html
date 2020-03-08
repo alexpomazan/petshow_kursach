@@ -12,24 +12,24 @@
 <hr>
 <div class="comments">
 <h5> Комментарии: </h5>
-{% if latest_comments_list %}
-    {% for c in latest_comments_list %}
+{% comment %} {% if comments %} {% endcomment %}
+    {% for comment in article.comments_set.all %}
     <div class='comment border rounded col-3 mb-3'>
     <div class='m-3'>
-    <strong>{{c.author_name}}</strong>
-    <p>{{c.comment_text}}</p>
+    <strong>{{comment.author_name}}</strong>
+    <p>{{comment.comment_text}}</p>
     </div>
     </div>
     {% endfor %}
-{% else %}
-Комментариев нет
-{% endif %}
+{% comment %} {% else %}
+<p>Комментариев нет!</p>
+{% endif %}  {% endcomment %}
 </div>
 <hr>
 {% if user.is_authenticated%}
     <div class="comments_form">
         <h4>Оставить комментарий</h4>
-            <form action="{% url 'leave_comment' article.id  %}" method="post" novalidate>
+            <form action="" method="post" novalidate>
     {% csrf_token %}
     {{ form|crispy }}
 	<input type="submit" class="btn btn-success w-100" value="Отправить"/>

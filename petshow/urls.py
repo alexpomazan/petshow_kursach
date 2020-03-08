@@ -19,7 +19,6 @@ urlpatterns = [
     path('vote_minus/<int:pet_id>', views.vote_minus, name="vote_minus"),
     path('article/', views.articles, name="article"),
     path('article/<int:article_id>/', views.detail, name ='detail'),
-    path('article/<int:article_id>/leave_comment/', views.leave_comment, name ='leave_comment'),
     path('about_us/', views.AboutUsView.as_view(), name="about_us"),
     path('accounts/', include('django.contrib.auth.urls')),
     path('contact/', views.contactform, name='contact'),

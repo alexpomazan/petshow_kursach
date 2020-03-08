@@ -3,16 +3,14 @@ from django.db.models import Count
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib import auth
-from django.views.generic import CreateView
-from django.views.generic import TemplateView
+from django.views.generic import CreateView, TemplateView
 from .models import *
+from .forms import *
 import re
 from django.contrib import messages
 from django.urls import reverse, reverse_lazy
 from django.http import Http404, HttpResponse, HttpResponseRedirect
-from .forms import *
 from django.core.mail import BadHeaderError, send_mail
-from .models import Article, Comment 
  
 def home(request):
     count = User.objects.count()
@@ -175,29 +173,35 @@ def catshow(request):
     
 def articles(request):
     latest_articles_list = Article.objects.order_by('-pub_date')[:5 ]
-    return render(request, 'article.html', {'latest_articles_list': latest_articles_list})
+    if request.method == "POST":
+        form = ArticleForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("article")
+    else:
+        form = ArticleForm()
+    return render(request, 'article.html', {'latest_articles_list': latest_articles_list, "form":form})
 
 def detail(request, article_id):
     try:
-        a = Article.objects.get( id = article_id)
+        a = get_object_or_404(Article, id=article_id)
     except:
         raise Http404("Статья не найдена!")
-    form=FormComment(article_id,request.user)
-    latest_comments_list = a.comment_set.order_by('-id')[:10]
-    context={'article': a, 'latest_comments_list': latest_comments_list,
-    'form':form}
-    return render(request, 'detail.html', context=context)
-
-def leave_comment(request, article_id):
-    try:
-        a = Article.objects.get( id = article_id)
-    except:
-        raise Http404("Статья не найдена!")
-    form=FormComment(article_id, request.user, request.POST)
-    if form.is_valid():
+    comment = Comments.objects.filter(id=article_id)
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            form = form.save(commit=False)
+            form.author_name = auth.get_user(request)
+            form.article = a
             form.save()
-    return HttpResponseRedirect( reverse('detail', args=(a.id,)) )
-
+            return redirect(detail, a.id) 
+    else:
+        form = CommentForm()
+    return render(request, "detail.html",
+                  {"article": a,
+                   "comments": comment,
+                   "form": form})
 
 class AboutUsView(TemplateView):
     template_name = "about_us.html"

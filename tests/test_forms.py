@@ -6,7 +6,7 @@ class TestForms(TestCase):
         self.user = User.objects.create_user('TestUser', 'kostya.petrov@mail.ru', 'john')
 
     def test_FormComment(self):
-        form = FormComment(self.user, data={
+        form = CommentForm(self.user, data={
             'article': '1',
             'author_name': self.user.id,
             'comment_text': 'Спасибо, хорошая статья!'

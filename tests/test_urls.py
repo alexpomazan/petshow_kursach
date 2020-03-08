@@ -13,7 +13,7 @@ class TestUrls(SimpleTestCase):
         self.assertEquals(response.status_code, 200)
 
     def test_shows_url(self):
-        response = self.client.get(reverse('shows'))
+        response = self.client.get(reverse('add_pet'))
         self.assertGreaterEqual(response.status_code, 200)
         self.assertLessEqual(response.status_code, 302)
 

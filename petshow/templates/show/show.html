@@ -2,10 +2,10 @@
 {% load static %}
 {% block title %} <title>{{ title }}</title> {% endblock %}
 {% block content %}
-<div class = "section_show">
+<div class = "content_shows">
 
     <div class="row">
-        <div class="col-10 offset-1">
+        <div class="col-12">
             {% if pets %}
 
                 {% if request.user.is_superuser %}
