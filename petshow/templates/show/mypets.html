@@ -6,7 +6,7 @@
 <div class="section_mypets">
     <div class="row py-4">
         <div class="col-md-10 offset-md-1">
-            <a class="btn btn-primary mb-3" href="{% url 'add_pet' %}">Добавить питомца</a>
+            <a class="btn btn-success mb-3" href="{% url 'add_pet' %}">Добавить питомца</a>
             <table class="table" border="1">
                 <thead>
                 <tr>
@@ -45,7 +45,7 @@
                                 </select>
                             </div>
                             {% if not pet.show %}
-                            <button class="btn btn-primary" type="submit">Принять участие</button>
+                            <button class="btn btn-outline-success" type="submit">Принять участие</button>
                             {% endif %}
                         </form>
                     </td>
